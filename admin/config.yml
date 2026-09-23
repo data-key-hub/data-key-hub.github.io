@@ -2,7 +2,7 @@ backend:
   name: github
   repo: data-key-hub/data-key-hub.github.io
   branch: main
-  base_url: https://keyur-cms-auth.keyur14112000.workers.dev
+  base_url: https://keyur-cms-auth.pages.dev
 
 media_folder: assets/uploads
 public_folder: assets/uploads
