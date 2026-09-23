@@ -1,43 +1,41 @@
-# Chirpy Starter
+# Keyur K — website
 
-[![Gem Version](https://img.shields.io/gem/v/jekyll-theme-chirpy)][gem]&nbsp;
-[![GitHub license](https://img.shields.io/github/license/cotes2020/chirpy-starter.svg?color=blue)][mit]
+A static site. No build step. Content lives in `content/*.json` and is edited through Decap CMS at `/admin`.
 
-When installing the [**Chirpy**][chirpy] theme through [RubyGems.org][gem], Jekyll can only read files in the folders
-`_data`, `_layouts`, `_includes`, `_sass` and `assets`, as well as a small part of options of the `_config.yml` file
-from the theme's gem. If you have ever installed this theme gem, you can use the command
-`bundle info --path jekyll-theme-chirpy` to locate these files.
+## What's in here
+- `Home.dc.html`, `projects.dc.html`, `project.dc.html`, `blog.dc.html`, `post.dc.html`, `about.dc.html`, `contact.dc.html`: the pages
+- `index.html`: sends visitors to the home page
+- `site.css`, `site.js`: shared theme (light/dark), helpers
+- `content/profile.json`, `content/projects.json`, `content/posts.json`: **all the words and images**
+- `admin/`: the CMS (log in, edit, publish)
+- `assets/uploads/`: images you upload through the CMS
+- `_ds/`, `support.js`: design system and page runtime (don't edit)
 
-The Jekyll team claims that this is to leave the ball in the user’s court, but this also results in users not being
-able to enjoy the out-of-the-box experience when using feature-rich themes.
+Each project and post gets its own page automatically: `project.dc.html?p=<slug>` and `post.dc.html?p=<slug>`.
 
-To fully use all the features of **Chirpy**, you need to copy the other critical files from the theme's gem to your
-Jekyll site. The following is a list of targets:
+## Deploy on Netlify (recommended: CMS login + contact form work out of the box)
+1. Push this folder to a GitHub repository (branch `main`).
+2. Go to netlify.com → **Add new site → Import from Git** → pick the repo. Leave the build command empty and set the publish directory to `/`.
+3. In the site dashboard: **Identity → Enable**. Under Registration, choose **Invite only**, then invite yourself.
+4. **Identity → Services → Git Gateway → Enable.**
+5. Open the invite email, set a password, and you land in `/admin`.
+6. **Forms:** the contact form is detected automatically. Submissions show up under **Forms**, and you can turn on email notifications there.
 
-```shell
-.
-├── _config.yml
-├── _plugins
-├── _tabs
-└── index.html
-```
+## Deploy on GitHub Pages (free; the CMS needs one extra step)
+1. Push to GitHub → **Settings → Pages → Deploy from branch `main` / root**.
+2. The site works straight away.
+3. **CMS:** GitHub Pages can't handle logins. In `admin/config.yml`, switch to the `github` backend (the commented block) and point `base_url` at an OAuth proxy, for example a free Cloudflare Worker such as "decap-proxy".
+4. **Contact form:** Pages can't receive form posts. Create a free Formspree form and change the form's `action` in `contact.dc.html` to your Formspree URL. The fetch call posts to `/`, so change that too.
 
-To save you time, and also in case you lose some files while copying, we extract those files/configurations of the
-latest version of the **Chirpy** theme and the [CD][CD] workflow to here, so that you can start writing in minutes.
+## Adding content
+Log in at `/admin`, then:
+- **Projects → Add project**: pick a Module, write sections, upload images, then Publish.
+- **Blog posts → Add post**: same idea. Posts sort by date.
+- **Profile & About**: your name, headline, bio, experience, links, CV, portrait.
 
-## Usage
+Before launch, delete the sample projects and posts in the CMS. Each list item has a delete button.
 
-Check out the [theme's docs](https://github.com/cotes2020/jekyll-theme-chirpy/wiki).
-
-## Contributing
-
-This repository is automatically updated with new releases from the theme repository. If you encounter any issues or want to contribute to its improvement, please visit the [theme repository][chirpy] to provide feedback.
-
-## License
-
-This work is published under [MIT][mit] License.
-
-[gem]: https://rubygems.org/gems/jekyll-theme-chirpy
-[chirpy]: https://github.com/cotes2020/jekyll-theme-chirpy/
-[CD]: https://en.wikipedia.org/wiki/Continuous_deployment
-[mit]: https://github.com/cotes2020/chirpy-starter/blob/master/LICENSE
+## Speed
+- The pages are static, so no server work happens on each request.
+- Upload images at roughly 1600px wide or smaller, as JPG/WebP. The CMS doesn't resize them for you.
+- Netlify and GitHub Pages both serve through a CDN with HTTPS.

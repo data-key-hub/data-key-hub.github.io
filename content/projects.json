@@ -1,0 +1,134 @@
+{
+  "items": [
+    {
+      "slug": "retrieval-support-agent",
+      "title": "Retrieval-Augmented Support Agent",
+      "module": "AI",
+      "level": "Advanced",
+      "year": "2026",
+      "featured": true,
+      "role": "Lead engineer",
+      "duration": "5 months",
+      "status": "In production",
+      "stack": "LangGraph, pgvector, FastAPI, Postgres, Python",
+      "summary": "Six years of support tickets made answerable in a sentence — every answer traceable to the ticket it came from.",
+      "lead": "Six years of support tickets made answerable in a sentence, and every sentence traceable back to the ticket it came from. Built for a sixty-agent helpdesk answering the same forty questions in forty different ways.",
+      "thumb": "",
+      "hero": "",
+      "sections": [
+        { "heading": "The brief", "body": "Support wanted a way for an agent to find the one previous ticket that settled a question — in under three seconds, with a link they could paste to the customer. Not a chatbot: a sidebar that reads the open ticket and offers the three passages most likely to close it.\n\nThe constraint that shaped everything: an answer with no citation is worse than no answer at all." },
+        { "heading": "Where it was failing", "body": "A first attempt existed — an off-the-shelf index chunked at five hundred tokens. It answered fluently and cited badly, because the chunker was cutting mid-resolution.", "quote": "The model was not hallucinating. It was doing its best with the wrong three chunks." },
+        { "heading": "Approach", "body": "Tickets are chunked on their resolution boundary, so every chunk is a complete thought. Metadata filters run before the reranker. The composer is structurally unable to assert anything it cannot cite: any span without a source is dropped before render.", "caption": "Retrieve → filter → rerank → compose" },
+        { "heading": "Evaluation", "body": "Retrieval is graded separately from generation. Four hundred questions with known-good sources run nightly; a build ships only if citation precision holds at or above the previous one.", "metrics": [ { "value": "92%", "label": "Citation precision" }, { "value": "1.8s", "label": "Median response" }, { "value": "−34%", "label": "Handle time" }, { "value": "60", "label": "Agents live" } ] },
+        { "heading": "Outcome", "body": "Live with the full support floor since March. The result I did not predict was convergence: once one canonical answer surfaced to everyone, the agents' own replies began to agree with each other." }
+      ]
+    },
+    {
+      "slug": "defect-detection",
+      "title": "Defect Detection on the Line",
+      "module": "Deep Learning",
+      "level": "Advanced",
+      "year": "2026",
+      "featured": true,
+      "role": "ML engineer",
+      "duration": "7 months",
+      "status": "In production",
+      "stack": "PyTorch, ONNX, Triton, Jetson",
+      "summary": "A convolutional inspector at the edge inside a 40 ms budget, retrained monthly from its least-certain frames.",
+      "lead": "A packaging line was catching four seal defects in five by eye. This put a camera and a small network on every line, running at the edge, inside the gap between two cartons.",
+      "thumb": "",
+      "hero": "",
+      "sections": [
+        { "heading": "The brief", "body": "Missed seal defects were reaching retailers and coming back as recalls. Manual inspection caught roughly eighty per cent, and the misses clustered at the end of long shifts." },
+        { "heading": "Constraints", "body": "No cloud round-trip: the decision had to land in forty milliseconds on an embedded board beside the conveyor, and a false reject costs a carton, so precision mattered as much as recall." },
+        { "heading": "Approach", "body": "A compact convolutional model distilled from a larger teacher, exported to ONNX and served on-device. Every month the frames the model was least sure about go to a human for labelling and back into training.", "quote": "The most valuable data was the data the model was unsure about.", "caption": "Camera → edge model → reject gate" },
+        { "heading": "Results", "body": "Measured over the first quarter across four lines.", "metrics": [ { "value": "98.6%", "label": "Defect recall" }, { "value": "31 ms", "label": "p95 inference" }, { "value": "−62%", "label": "Escaped defects" }, { "value": "4", "label": "Lines live" } ] }
+      ]
+    },
+    {
+      "slug": "churn-propensity",
+      "title": "Churn Propensity Service",
+      "module": "Machine Learning",
+      "level": "Advanced",
+      "year": "2025",
+      "featured": true,
+      "role": "Lead engineer",
+      "duration": "4 months",
+      "status": "In production",
+      "stack": "Python, Feast, XGBoost, FastAPI",
+      "summary": "A feature store and a low-latency scoring endpoint the growth team calls, monitored weekly for drift.",
+      "lead": "Growth wanted to know who was about to leave while there was still time to do something about it. This is the feature store, the model and the endpoint that tell them.",
+      "thumb": "",
+      "hero": "",
+      "sections": [
+        { "heading": "The brief", "body": "A monthly spreadsheet of at-risk accounts arrived three weeks after the risk. The team needed a score at the moment of decision — inside the CRM, per account, on demand." },
+        { "heading": "Features", "body": "Every feature is computed point-in-time correct in a feature store, so training sees exactly what serving would have seen. That one rule removed most of the leakage the first prototype had.", "quote": "Leakage is the only bug that makes your model look better." },
+        { "heading": "Serving and monitoring", "body": "A gradient-boosted model behind a small API, with weekly drift reports on both inputs and scores. When drift crosses a threshold, retraining is proposed rather than automatic.", "metrics": [ { "value": "0.84", "label": "AUC" }, { "value": "45 ms", "label": "p95 latency" }, { "value": "+11%", "label": "Retention, targeted" } ] }
+      ]
+    },
+    {
+      "slug": "warehouse-ingestion",
+      "title": "Warehouse Ingestion Pipeline",
+      "module": "Data Engineering",
+      "level": "Applied",
+      "year": "2024",
+      "featured": true,
+      "role": "Data engineer",
+      "duration": "6 months",
+      "status": "In production",
+      "stack": "Airflow, dbt, Fivetran, Snowflake",
+      "summary": "Forty-one sources into one orchestration graph, with tests that fail loudly before anyone opens a report.",
+      "lead": "Forty-one sources, three schedulers and nobody quite sure which one loaded what. This consolidated them into one graph with tests at every edge.",
+      "thumb": "",
+      "hero": "",
+      "sections": [
+        { "heading": "The brief", "body": "Reports were occasionally wrong and nobody knew until a meeting. The goal was simple to state: bad data should stop the pipeline, not reach the dashboard." },
+        { "heading": "Orchestration", "body": "One Airflow graph owns every load, with dbt models as tasks and freshness checks as gates. Each source has an owner, a schedule and an expected row count.", "caption": "Sources → staging → marts, with tests at each edge" },
+        { "heading": "Tests", "body": "Uniqueness, not-null, accepted values and row-count bands on every model. A failing test halts downstream tasks and pages the owner.", "quote": "A pipeline that fails loudly is a pipeline people can trust." },
+        { "heading": "Outcome", "body": "Six months in, not one silent failure has reached a report.", "metrics": [ { "value": "41", "label": "Sources" }, { "value": "99.7%", "label": "On-time loads" }, { "value": "−38%", "label": "Warehouse cost" }, { "value": "0", "label": "Silent failures" } ] }
+      ]
+    },
+    {
+      "slug": "cohort-revenue-model",
+      "title": "Cohort Revenue Model",
+      "module": "Data Analytics",
+      "level": "Applied",
+      "year": "2024",
+      "featured": false,
+      "role": "Analytics engineer",
+      "duration": "3 months",
+      "status": "Live",
+      "stack": "dbt, Snowflake, Metabase",
+      "summary": "Retention curves finance and growth finally agree on, rebuilt as reusable marts with documented grain.",
+      "lead": "Finance and growth each had a retention number, and they never matched. This gave both teams one model and one definition.",
+      "thumb": "",
+      "hero": "",
+      "sections": [
+        { "heading": "The disagreement", "body": "Finance counted a customer as active when they paid; growth counted a login. Both were right, and the monthly review spent its first twenty minutes arguing about it." },
+        { "heading": "The model", "body": "A set of dbt marts at a documented grain — one row per customer per month — with both definitions available as named columns rather than competing dashboards.", "caption": "Customer-month grain, two activity definitions" },
+        { "heading": "Outcome", "body": "The argument moved from which number to what to do about it.", "metrics": [ { "value": "1", "label": "Shared definition" }, { "value": "14", "label": "Dashboards retired" }, { "value": "6 min", "label": "Month-end refresh" } ] }
+      ]
+    },
+    {
+      "slug": "retail-sales-dashboard",
+      "title": "Retail Sales Dashboard",
+      "module": "Data Analytics",
+      "level": "Foundation",
+      "year": "2023",
+      "featured": false,
+      "role": "Analyst",
+      "duration": "6 weeks",
+      "status": "Live",
+      "stack": "SQL, Power BI",
+      "summary": "One store manager's spreadsheet turned into a governed model with a single definition of “net sale”.",
+      "lead": "A store manager had built the most useful spreadsheet in the company. This turned it into something the other two hundred stores could use too.",
+      "thumb": "",
+      "hero": "",
+      "sections": [
+        { "heading": "The spreadsheet", "body": "It worked because one person understood every formula. It broke whenever that person was on leave." },
+        { "heading": "The model", "body": "The same logic, written once in SQL with a single definition of net sale, feeding a Power BI report that looks deliberately like the original spreadsheet.", "quote": "Keep what people already trust; change what they cannot see." },
+        { "heading": "Outcome", "body": "Adopted across the estate within a quarter.", "metrics": [ { "value": "212", "label": "Stores using it" }, { "value": "1", "label": "Definition of net sale" } ] }
+      ]
+    }
+  ]
+}

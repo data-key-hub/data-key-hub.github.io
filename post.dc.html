@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<title>Writing — Keyur K</title>
+<link rel="stylesheet" href="_ds/classical-9b5d3fbb-4395-43b3-8682-34d1d8fadc0a/styles.css">
+<script src="_ds/classical-9b5d3fbb-4395-43b3-8682-34d1d8fadc0a/_ds_bundle.js"></script>
+<link rel="stylesheet" href="site.css">
+<script src="site.js"></script>
+</helmet>
+
+<nav style="position:sticky;top:0;z-index:30;background:color-mix(in srgb,var(--paper) 90%,transparent);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-bottom:1px solid var(--color-divider)">
+  <div class="wrap" style="display:flex;align-items:center;justify-content:space-between;gap:var(--space-4);height:64px">
+    <a href="Home.dc.html" style="font-family:var(--font-heading);font-size:21px;font-weight:500;color:var(--color-text)">Keyur K</a>
+    <div style="display:flex;align-items:center;gap:var(--space-6)">
+      <div class="navlinks" style="display:flex;align-items:center;gap:var(--space-6);font-size:14px">
+        <a href="projects.dc.html" style="color:var(--color-text)">Work</a>
+        <a href="blog.dc.html" style="color:var(--color-accent-700);border-bottom:1px solid var(--color-accent)">Writing</a>
+        <a href="about.dc.html" style="color:var(--color-text)">About</a>
+        <a href="contact.dc.html" style="color:var(--color-text)">Contact</a>
+      </div>
+      <div style="display:flex;gap:var(--space-2)">
+        <button class="icon-btn" onClick="{{ toggleTheme }}" aria-label="Switch between light and dark" title="Light / dark"><span class="ico ico-theme"></span></button>
+        <button class="icon-btn menu-btn" onClick="{{ toggleMenu }}" aria-label="Menu"><span class="ico i-menu"></span></button>
+      </div>
+    </div>
+  </div>
+  <sc-if value="{{ menuOpen }}" hint-placeholder-val="{{ false }}">
+    <div class="wrap mobile-menu" style="flex-direction:column;padding-bottom:var(--space-4);font-family:var(--font-heading);font-size:22px">
+      <a href="Home.dc.html" style="padding:10px 0;border-top:1px solid var(--color-divider);color:var(--color-text)">Home</a>
+      <a href="projects.dc.html" style="padding:10px 0;border-top:1px solid var(--color-divider);color:var(--color-text)">Work</a>
+      <a href="blog.dc.html" style="padding:10px 0;border-top:1px solid var(--color-divider);color:var(--color-accent-700)">Writing</a>
+      <a href="about.dc.html" style="padding:10px 0;border-top:1px solid var(--color-divider);color:var(--color-text)">About</a>
+      <a href="contact.dc.html" style="padding:10px 0;border-top:1px solid var(--color-divider);color:var(--color-text)">Contact</a>
+    </div>
+  </sc-if>
+</nav>
+<div aria-hidden="true" style="position:sticky;top:64px;z-index:29;height:2px;background:transparent"><div style="{{ progressStyle }}"></div></div>
+
+<main>
+<header class="wrap" style="padding-top:calc(var(--space-8) * 1.5);padding-bottom:var(--space-8);text-align:center;border-bottom:1px solid var(--color-divider)">
+  <a href="blog.dc.html?c={{ catKey }}" style="font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--color-accent-700)">{{ catLabel }}</a>
+  <h1 style="font-size:clamp(36px,6vw,58px);font-weight:400;line-height:1.04;margin:var(--space-4) auto;max-width:18ch;text-wrap:balance">{{ post.title }}</h1>
+  <p style="max-width:56ch;margin:0 auto;font-size:17px;line-height:1.6;color:var(--muted)">{{ post.standfirst }}</p>
+  <p style="font-size:12.5px;font-feature-settings:'tnum';color:var(--faint);margin:var(--space-6) 0 0">Keyur K · {{ dateLong }} · {{ post.minutes }} minute read</p>
+</header>
+
+<div class="wrap stack-sm" style="display:grid;grid-template-columns:200px minmax(0,1fr);gap:calc(var(--space-8) * 1.5);padding-top:calc(var(--space-8) * 1.5);padding-bottom:calc(var(--space-8) * 1.5)">
+  <aside class="static-sm" style="position:sticky;top:88px;align-self:start">
+    <div style="font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--faint)">On this page</div>
+    <div style="font-size:13.5px;line-height:1.5;margin-top:var(--space-3);border-left:1px solid var(--color-divider);display:flex;flex-direction:column">
+      <sc-for list="{{ toc }}" as="t" hint-placeholder-count="4">
+        <a href="#{{ t.id }}" style="{{ t.style }}">{{ t.heading }}</a>
+      </sc-for>
+    </div>
+    <div style="font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--faint);margin-top:var(--space-8)">Filed under</div>
+    <div style="margin-top:var(--space-2)"><a class="tag tag-outline" href="blog.dc.html?c={{ catKey }}">{{ post.category }}</a></div>
+    <sc-if value="{{ hasRelated }}" hint-placeholder-val="{{ true }}">
+      <div style="font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--faint);margin-top:var(--space-8)">Read next</div>
+      <div style="display:flex;flex-direction:column;gap:var(--space-2);margin-top:var(--space-3);font-size:14px;line-height:1.4">
+        <sc-for list="{{ related }}" as="r" hint-placeholder-count="2"><a href="post.dc.html?p={{ r.slug }}">{{ r.title }}</a></sc-for>
+      </div>
+    </sc-if>
+  </aside>
+
+  <article style="max-width:66ch;min-width:0">
+    <p style="font-size:19px;line-height:1.62;text-align:justify;hyphens:auto;color:var(--color-text);margin:0 0 var(--space-8)"><span style="float:left;font-family:var(--font-heading);font-size:70px;line-height:.8;padding:6px 10px 0 0;color:var(--color-accent-700)">{{ capLetter }}</span>{{ capRest }}</p>
+    <sc-for list="{{ sections }}" as="s" hint-placeholder-count="3">
+      <section id="{{ s.id }}" data-sec="{{ s.id }}" style="scroll-margin-top:88px;margin-bottom:var(--space-8)">
+        <h2 style="font-weight:400;font-size:28px;margin:0 0 var(--space-4);padding-top:var(--space-6);border-top:1px solid var(--color-divider)">{{ s.heading }}</h2>
+        <sc-for list="{{ s.paras }}" as="para" hint-placeholder-count="1">
+          <p style="text-align:justify;hyphens:auto;font-size:16.5px;line-height:1.78;margin:0 0 var(--space-4)">{{ para }}</p>
+        </sc-for>
+        <sc-if value="{{ s.quote }}" hint-placeholder-val="{{ false }}">
+          <blockquote style="margin:var(--space-6) 0;padding-left:var(--space-6);border-left:2px solid var(--color-accent);font-family:var(--font-heading);font-size:26px;line-height:1.32;color:var(--muted);max-width:40ch">{{ s.quote }}</blockquote>
+        </sc-if>
+      </section>
+    </sc-for>
+    <sc-if value="{{ hasNotes }}" hint-placeholder-val="{{ false }}">
+      <section id="notes" style="scroll-margin-top:88px;border-top:1px solid var(--color-divider);padding-top:var(--space-6);margin-bottom:var(--space-8)">
+        <div style="font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--faint)">Notes</div>
+        <ol style="font-size:13.5px;line-height:1.75;color:var(--muted);padding-left:1.2em;margin:var(--space-3) 0 0">
+          <sc-for list="{{ notes }}" as="n" hint-placeholder-count="2"><li>{{ n }}</li></sc-for>
+        </ol>
+      </section>
+    </sc-if>
+    <div style="display:flex;justify-content:space-between;gap:var(--space-4);flex-wrap:wrap;font-size:14px;border-top:1px solid var(--color-divider);padding-top:var(--space-6)">
+      <a href="blog.dc.html">← All writing</a>
+      <a href="post.dc.html?p={{ next.slug }}">Next · {{ next.title }} →</a>
+    </div>
+  </article>
+</div>
+</main>
+
+<footer style="border-top:1px solid var(--color-divider)">
+  <div class="wrap" style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:var(--space-4);padding-top:var(--space-6);padding-bottom:var(--space-6);font-size:13px;color:var(--faint)">
+    <span>© 2026 Keyur K</span>
+    <span style="display:flex;gap:var(--space-6)"><a href="{{ profile.github }}">GitHub</a><a href="{{ profile.linkedin }}">LinkedIn</a><a href="{{ mailto }}">Email</a></span>
+  </div>
+</footer>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { menuOpen: false, data: null, active: null, progress: 0 };
+  async componentDidMount() {
+    const S = await (window.Site ? Promise.resolve(window.Site) : new Promise(r => { const t = () => window.Site ? r(window.Site) : setTimeout(t, 16); t(); }));
+    this.S = S;
+    this.onScroll = () => {
+      const h = document.documentElement, max = h.scrollHeight - h.clientHeight;
+      const p = max > 0 ? Math.min(1, h.scrollTop / max) : 0;
+      if (Math.abs(p - this.state.progress) > 0.005) this.setState({ progress: p });
+    };
+    window.addEventListener('scroll', this.onScroll, { passive: true });
+    this.setState({ data: await S.all() }, () => setTimeout(() => this.spy(), 60));
+  }
+  componentWillUnmount() { this.io && this.io.disconnect(); window.removeEventListener('scroll', this.onScroll); }
+  spy() {
+    this.io && this.io.disconnect();
+    const els = document.querySelectorAll('[data-sec]');
+    if (!els.length || !window.IntersectionObserver) return;
+    this.io = new IntersectionObserver(es => {
+      const vis = es.filter(e => e.isIntersecting).sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
+      if (vis[0]) this.setState({ active: vis[0].target.id });
+    }, { rootMargin: '-90px 0px -60% 0px' });
+    els.forEach(el => this.io.observe(el));
+  }
+  renderVals() {
+    const d = this.state.data, S = this.S;
+    const profile = d ? d.profile : {};
+    const posts = d ? d.posts : [];
+    const slug = S ? S.param('p') : null;
+    const idx = Math.max(0, posts.findIndex(x => x.slug === slug));
+    const post = posts[idx] || {};
+    const mod = (profile.modules || []).find(m => m.name === post.category) || {};
+    if (post.title && document.title !== post.title + ' — Keyur K') document.title = post.title + ' — Keyur K';
+    const sections = (post.sections || []).map((s, i) => ({ ...s, id: 'p' + (i + 1), paras: S ? S.paras(s.body) : [] }));
+    const active = this.state.active || (sections[0] && sections[0].id);
+    const intro = String(post.intro || '');
+    const notes = S ? S.lines(post.notes) : [];
+    const others = posts.filter(p => p.slug !== post.slug);
+    const related = others.filter(p => p.category === post.category).concat(others.filter(p => p.category !== post.category)).slice(0, 2);
+    return {
+      toggleTheme: () => window.Site && window.Site.toggleTheme(),
+      toggleMenu: () => this.setState(s => ({ menuOpen: !s.menuOpen })),
+      menuOpen: this.state.menuOpen,
+      profile, mailto: 'mailto:' + (profile.email || ''),
+      post, catKey: encodeURIComponent(post.category || ''),
+      catLabel: mod.numeral ? 'Module ' + mod.numeral + ' · ' + mod.full : (post.category || ''),
+      dateLong: S && post.date ? S.date(post.date, true) : '',
+      capLetter: intro.charAt(0), capRest: intro.slice(1),
+      sections,
+      toc: sections.map(s => ({ id: s.id, heading: s.heading, style: {
+        padding: '6px 0 6px 14px', marginLeft: '-1px',
+        borderLeft: '1px solid ' + (s.id === active ? 'var(--color-accent)' : 'transparent'),
+        color: s.id === active ? 'var(--color-accent-700)' : 'var(--muted)'
+      } })),
+      hasNotes: notes.length > 0, notes,
+      hasRelated: related.length > 0, related,
+      next: posts.length > 1 ? posts[(idx + 1) % posts.length] : {},
+      progressStyle: { height: '2px', width: (this.state.progress * 100).toFixed(1) + '%', background: 'var(--color-accent)' }
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<title>Projects — Keyur K</title>
+<meta name="description" content="Projects by Keyur K across AI, deep learning, machine learning, data analytics and data engineering.">
+<link rel="stylesheet" href="_ds/classical-9b5d3fbb-4395-43b3-8682-34d1d8fadc0a/styles.css">
+<script src="_ds/classical-9b5d3fbb-4395-43b3-8682-34d1d8fadc0a/_ds_bundle.js"></script>
+<link rel="stylesheet" href="site.css">
+<script src="site.js"></script>
+</helmet>
+
+<nav style="position:sticky;top:0;z-index:30;background:color-mix(in srgb,var(--paper) 90%,transparent);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-bottom:1px solid var(--color-divider)">
+  <div class="wrap" style="display:flex;align-items:center;justify-content:space-between;gap:var(--space-4);height:64px">
+    <a href="Home.dc.html" style="font-family:var(--font-heading);font-size:21px;font-weight:500;color:var(--color-text)">Keyur K</a>
+    <div style="display:flex;align-items:center;gap:var(--space-6)">
+      <div class="navlinks" style="display:flex;align-items:center;gap:var(--space-6);font-size:14px">
+        <a href="projects.dc.html" aria-current="page" style="color:var(--color-accent-700);border-bottom:1px solid var(--color-accent)">Work</a>
+        <a href="blog.dc.html" style="color:var(--color-text)">Writing</a>
+        <a href="about.dc.html" style="color:var(--color-text)">About</a>
+        <a href="contact.dc.html" style="color:var(--color-text)">Contact</a>
+      </div>
+      <div style="display:flex;gap:var(--space-2)">
+        <button class="icon-btn" onClick="{{ toggleTheme }}" aria-label="Switch between light and dark" title="Light / dark"><span class="ico ico-theme"></span></button>
+        <button class="icon-btn menu-btn" onClick="{{ toggleMenu }}" aria-label="Menu"><span class="ico i-menu"></span></button>
+      </div>
+    </div>
+  </div>
+  <sc-if value="{{ menuOpen }}" hint-placeholder-val="{{ false }}">
+    <div class="wrap mobile-menu" style="flex-direction:column;padding-bottom:var(--space-4);font-family:var(--font-heading);font-size:22px">
+      <a href="Home.dc.html" style="padding:10px 0;border-top:1px solid var(--color-divider);color:var(--color-text)">Home</a>
+      <a href="projects.dc.html" style="padding:10px 0;border-top:1px solid var(--color-divider);color:var(--color-accent-700)">Work</a>
+      <a href="blog.dc.html" style="padding:10px 0;border-top:1px solid var(--color-divider);color:var(--color-text)">Writing</a>
+      <a href="about.dc.html" style="padding:10px 0;border-top:1px solid var(--color-divider);color:var(--color-text)">About</a>
+      <a href="contact.dc.html" style="padding:10px 0;border-top:1px solid var(--color-divider);color:var(--color-text)">Contact</a>
+    </div>
+  </sc-if>
+</nav>
+
+<main>
+<header class="wrap" style="padding-top:calc(var(--space-8) * 1.5);padding-bottom:var(--space-6)">
+  <div style="font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--color-accent-700)">Portfolio</div>
+  <h1 style="font-size:clamp(38px,5.6vw,62px);font-weight:400;line-height:1.03;margin:var(--space-3) 0">Projects</h1>
+  <p style="max-width:60ch;font-size:16px;line-height:1.6;color:var(--muted);margin:0">{{ intro }}</p>
+  <div role="group" aria-label="Filter by module" style="display:flex;gap:var(--space-2);flex-wrap:wrap;margin-top:var(--space-6)">
+    <sc-for list="{{ chips }}" as="c" hint-placeholder-count="6">
+      <button class="btn chip" aria-pressed="{{ c.pressed }}" style="{{ c.style }}" onClick="{{ c.onClick }}">{{ c.label }}<span style="margin-left:7px;opacity:.65;font-feature-settings:'tnum';font-size:12px">{{ c.count }}</span></button>
+    </sc-for>
+  </div>
+</header>
+
+<section class="wrap" style="padding-bottom:calc(var(--space-8) * 1.5)">
+  <div style="display:flex;flex-direction:column;border-bottom:1px solid var(--color-divider)">
+    <sc-for list="{{ shown }}" as="p" hint-placeholder-count="6">
+      <a class="lift row-sm" href="project.dc.html?p={{ p.slug }}" style="display:grid;grid-template-columns:120px minmax(0,1fr) 190px 56px;gap:var(--space-6);align-items:start;padding:var(--space-4) var(--space-2);border-top:1px solid var(--color-divider);color:inherit">
+        <div class="hide-sm plate" style="aspect-ratio:4/3;overflow:hidden">
+          <sc-if value="{{ p.thumb }}" hint-placeholder-val="{{ false }}"><img src="{{ p.thumb }}" alt="" loading="lazy"></sc-if>
+          <sc-if value="{{ p.noThumb }}" hint-placeholder-val="{{ true }}"><div class="ph" style="width:100%;height:100%;font-size:9px">Image</div></sc-if>
+        </div>
+        <span>
+          <span style="display:block;font-family:var(--font-heading);font-size:25px;line-height:1.15">{{ p.title }}</span>
+          <span style="display:block;font-size:14px;line-height:1.55;color:var(--muted);margin-top:5px;text-align:justify;hyphens:auto">{{ p.summary }}</span>
+          <span style="display:block;font-size:12px;letter-spacing:.02em;margin-top:9px;color:var(--color-accent-700)">{{ p.stackLabel }}</span>
+        </span>
+        <span class="hide-sm" style="font-size:11px;letter-spacing:.08em;text-transform:uppercase;line-height:1.7;color:var(--faint);padding-top:6px">{{ p.module }}<br>{{ p.level }}</span>
+        <span style="font-size:12px;font-feature-settings:'tnum';text-align:right;color:var(--faint);padding-top:6px">{{ p.year }}</span>
+      </a>
+    </sc-for>
+  </div>
+</section>
+</main>
+
+<footer style="border-top:1px solid var(--color-divider)">
+  <div class="wrap" style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:var(--space-4);padding-top:var(--space-6);padding-bottom:var(--space-6);font-size:13px;color:var(--faint)">
+    <span>© 2026 Keyur K</span>
+    <span style="display:flex;gap:var(--space-6)"><a href="{{ profile.github }}">GitHub</a><a href="{{ profile.linkedin }}">LinkedIn</a><a href="{{ mailto }}">Email</a></span>
+  </div>
+</footer>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { menuOpen: false, data: null, mod: 'All' };
+  async componentDidMount() {
+    const S = await (window.Site ? Promise.resolve(window.Site) : new Promise(r => { const t = () => window.Site ? r(window.Site) : setTimeout(t, 16); t(); }));
+    this.S = S;
+    const m = S.param('m');
+    this.setState({ data: await S.all(), mod: m || 'All' });
+  }
+  setMod(mod) {
+    this.setState({ mod });
+    const u = new URL(location.href);
+    if (mod === 'All') u.searchParams.delete('m'); else u.searchParams.set('m', mod);
+    history.replaceState(null, '', u);
+  }
+  renderVals() {
+    const d = this.state.data, S = this.S;
+    const profile = d ? d.profile : {};
+    const projects = d ? d.projects : [];
+    const mod = this.state.mod;
+    const names = ['All'].concat((profile.modules || []).map(m => m.name));
+    const base = {};
+    const chips = names.map(label => {
+      const on = label === mod;
+      return {
+        label, pressed: on ? 'true' : 'false',
+        count: label === 'All' ? projects.length : projects.filter(p => p.module === label).length,
+        onClick: () => this.setMod(label),
+        style: on ? { color: 'var(--color-accent-700)', borderColor: 'var(--color-accent)', background: 'color-mix(in srgb, var(--color-accent) 12%, transparent)' } : { borderColor: 'var(--color-divider)', color: 'var(--color-text)' }
+      };
+    });
+    const shown = (mod === 'All' ? projects : projects.filter(p => p.module === mod)).map(p => ({
+      ...p, noThumb: !p.thumb, stackLabel: S ? S.list(p.stack).join(' · ') : ''
+    }));
+    return {
+      toggleTheme: () => window.Site && window.Site.toggleTheme(),
+      toggleMenu: () => this.setState(s => ({ menuOpen: !s.menuOpen })),
+      menuOpen: this.state.menuOpen,
+      profile, mailto: 'mailto:' + (profile.email || ''),
+      intro: projects.length + ' builds across five modules, newest first. Filter by the discipline you care about.',
+      chips, shown
+    };
+  }
+}
+</script>
+</body>
+</html>

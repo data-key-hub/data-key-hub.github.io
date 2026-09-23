@@ -1,0 +1,73 @@
+{
+  "items": [
+    {
+      "slug": "rag-is-a-retrieval-problem",
+      "title": "Your RAG system is a retrieval problem",
+      "category": "AI",
+      "date": "2026-07-19",
+      "minutes": "4",
+      "excerpt": "Nine times out of ten the model is not hallucinating — it was handed the wrong three chunks. Fix the index before you touch the prompt.",
+      "standfirst": "Nine times out of ten the model is not hallucinating. It was handed the wrong three chunks, and it did what it was built to do.",
+      "hero": "",
+      "intro": "Every retrieval system I have been asked to rescue was described to me as a model problem. It almost never is. The model wrote a confident paragraph because a confident paragraph is the only thing it could do with the three bad passages it was given.",
+      "sections": [
+        { "heading": "The symptom", "body": "You ask a question you already know the answer to. The system answers something adjacent — right vocabulary, wrong specifics — and cites a document that mentions your keywords in passing.\n\nThe tell is the citation. Open the cited source. If the answer is not in there, you have a retrieval failure wearing a generation failure's clothes." },
+        { "heading": "Chunk on meaning", "body": "Fixed-width chunking is convenient and almost always wrong. A ticket has a resolution; a contract has clauses. Cut on the seam the document already has.\n\nOverlap is a patch for a bad boundary, not a strategy.", "quote": "A chunk should be the smallest passage that would satisfy a reader who saw nothing else." },
+        { "heading": "Filter before you rank", "body": "Metadata filters are unglamorous and they outperform every reranker I have benchmarked. Apply them first and the reranker receives a shortlist worth ranking." },
+        { "heading": "Measure the halves apart", "body": "Grade retrieval separately from generation: known-good sources, recall at five, run nightly. If recall is healthy and the answers are still wrong, then — and only then — you have a model problem." }
+      ],
+      "notes": "Log the retrieved passages alongside every answer. Storage is cheaper than the argument.\nRecall at five, not at one — readers see three suggestions."
+    },
+    {
+      "slug": "star-schemas-still-win",
+      "title": "Star schemas still win",
+      "category": "Data Analytics",
+      "date": "2026-07-03",
+      "minutes": "6",
+      "excerpt": "One-big-table is a storage answer to a modelling question. A dimensional model still explains itself to an analyst who joined last week.",
+      "standfirst": "One-big-table is a storage answer to a modelling question.",
+      "hero": "",
+      "intro": "Every few years someone announces that dimensional modelling is obsolete because storage is cheap. Storage was never the point. The point was that a new analyst could look at the model and understand the business.",
+      "sections": [
+        { "heading": "What the wide table costs", "body": "A single wide table is fast to build and fast to query. It is also a thousand columns nobody can explain, with grain that changes halfway down." },
+        { "heading": "What the star buys", "body": "Facts at a declared grain, dimensions that mean one thing each. The model documents itself, and questions have an obvious place to start.", "quote": "A model is a description of the business that happens to be queryable." },
+        { "heading": "Use both", "body": "Build the star; publish wide tables from it for the dashboards that want them. The wide table is an output, not a foundation." }
+      ],
+      "notes": ""
+    },
+    {
+      "slug": "reading-an-execution-plan",
+      "title": "Reading an execution plan without fear",
+      "category": "Data Engineering",
+      "date": "2026-06-12",
+      "minutes": "8",
+      "excerpt": "The plan is not an oracle, it is a story about how the engine intends to spend its time. Here is the order I read it in.",
+      "standfirst": "The plan is a story about how the engine intends to spend its time.",
+      "hero": "",
+      "intro": "Execution plans look like they were designed to be ignored. They reward about ten minutes of attention with most of what you need to know about a slow query.",
+      "sections": [
+        { "heading": "Start at the bottom", "body": "Read from the leaves: which tables are scanned, and how much of each. A full scan of a large table is usually the whole story." },
+        { "heading": "Find the row explosion", "body": "Look for the join where estimated rows jump by orders of magnitude. That is almost always a missing join key or a grain mismatch." },
+        { "heading": "Then, and only then, tune", "body": "Clustering, pruning and materialisation all help — after the query is asking the right question.", "quote": "Most slow queries are wrong queries that happen to finish." }
+      ],
+      "notes": ""
+    },
+    {
+      "slug": "what-i-check-before-trusting-a-dashboard",
+      "title": "What I check before trusting a dashboard",
+      "category": "Machine Learning",
+      "date": "2026-05-28",
+      "minutes": "3",
+      "excerpt": "Row counts, a freshness stamp, and one number I can verify by hand. If a dashboard cannot survive those three, it is decoration.",
+      "standfirst": "Three checks, five minutes, before any number goes in a deck.",
+      "hero": "",
+      "intro": "Before I quote a number from a dashboard I have not built, I spend five minutes on three checks. They have saved me more embarrassment than any tool.",
+      "sections": [
+        { "heading": "Freshness", "body": "When was this last loaded? If the dashboard does not say, that is the first finding." },
+        { "heading": "Row counts", "body": "Does the total roughly match the source? An order-of-magnitude gap means a join or a filter is wrong." },
+        { "heading": "One number by hand", "body": "Pick one figure and reproduce it from raw data. If you cannot, nobody else can either." }
+      ],
+      "notes": ""
+    }
+  ]
+}

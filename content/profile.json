@@ -1,0 +1,31 @@
+{
+  "name": "Keyur K",
+  "role": "Data Analytics Engineer",
+  "location": "Bengaluru",
+  "years": "9 years",
+  "available": true,
+  "email": "hello@keyvora.com",
+  "github": "https://github.com/",
+  "linkedin": "https://www.linkedin.com/",
+  "cv": "",
+  "portrait": "",
+  "heroTitle": "I build the data layer, and the models that earn a place on top of it.",
+  "heroLead": "Nine years moving numbers from source systems to the people who act on them — warehouse modelling, orchestration, and the analytics and machine-learning layer above. The work is filed in five modules; read whichever one you came for.",
+  "aboutTitle": "I make data trustworthy, then make it useful.",
+  "about": "I am Keyur — a data analytics engineer who has spent nine years moving numbers from source systems to the people who act on them. That has meant modelling warehouses, orchestrating loads and writing the tests that catch a broken join before a director does; increasingly it has meant the machine-learning layer on top — propensity models, vision at the edge, and retrieval systems that can cite their sources.\n\nI keep the work filed in five modules on purpose. AI and deep learning are where the newest questions live; machine learning, data analytics and data engineering are the ground they stand on. I do not think you can do one well while treating the others as someone else's problem.\n\nWhen something works, it is usually because the boring parts were done first: a defined grain, a nightly test, a number someone can verify by hand. I write about that on the blog, and the receipts are in the projects.",
+  "modules": [
+    { "numeral": "I", "name": "AI", "full": "Artificial Intelligence", "desc": "Retrieval agents, evaluation harnesses, grounded assistants." },
+    { "numeral": "II", "name": "Deep Learning", "full": "Deep Learning", "desc": "Vision at the edge and the training pipelines behind it." },
+    { "numeral": "III", "name": "Machine Learning", "full": "Machine Learning", "desc": "Propensity, forecasting and feature stores in production." },
+    { "numeral": "IV", "name": "Data Analytics", "full": "Data Analytics", "desc": "Semantic layers and dashboards worth trusting." },
+    { "numeral": "V", "name": "Data Engineering", "full": "Data Engineering", "desc": "Ingestion, orchestration and cost control." }
+  ],
+  "experience": [
+    { "years": "2023 – now", "role": "Independent consultant", "org": "Keyvora Analytics", "note": "AI and analytics engineering for retail and fintech." },
+    { "years": "2020 – 23", "role": "Senior Analytics Engineer", "org": "A logistics scale-up", "note": "Built the warehouse and the team around it." },
+    { "years": "2017 – 20", "role": "Data Engineer", "org": "A fintech", "note": "Ingestion, orchestration, first ML in production." },
+    { "years": "2015 – 17", "role": "Data Analyst", "org": "A retail chain", "note": "Where the spreadsheets became models." }
+  ],
+  "tools": "Python, SQL, dbt, Snowflake, Airflow, PyTorch, LangGraph, pgvector, FastAPI, Power BI, Metabase, Fivetran",
+  "principles": "Model it once; test it always.\nA number no one can verify by hand is decoration.\nThe boring parts first — grain, tests, docs.\nAn answer with no citation is worse than no answer."
+}

@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<title>Contact — Keyur K</title>
+<meta name="description" content="Get in touch with Keyur K about AI, analytics engineering and data work.">
+<link rel="stylesheet" href="_ds/classical-9b5d3fbb-4395-43b3-8682-34d1d8fadc0a/styles.css">
+<script src="_ds/classical-9b5d3fbb-4395-43b3-8682-34d1d8fadc0a/_ds_bundle.js"></script>
+<link rel="stylesheet" href="site.css">
+<script src="site.js"></script>
+</helmet>
+
+<nav style="position:sticky;top:0;z-index:30;background:color-mix(in srgb,var(--paper) 90%,transparent);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-bottom:1px solid var(--color-divider)">
+  <div class="wrap" style="display:flex;align-items:center;justify-content:space-between;gap:var(--space-4);height:64px">
+    <a href="Home.dc.html" style="font-family:var(--font-heading);font-size:21px;font-weight:500;color:var(--color-text)">Keyur K</a>
+    <div style="display:flex;align-items:center;gap:var(--space-6)">
+      <div class="navlinks" style="display:flex;align-items:center;gap:var(--space-6);font-size:14px">
+        <a href="projects.dc.html" style="color:var(--color-text)">Work</a>
+        <a href="blog.dc.html" style="color:var(--color-text)">Writing</a>
+        <a href="about.dc.html" style="color:var(--color-text)">About</a>
+        <a href="contact.dc.html" aria-current="page" style="color:var(--color-accent-700);border-bottom:1px solid var(--color-accent)">Contact</a>
+      </div>
+      <div style="display:flex;gap:var(--space-2)">
+        <button class="icon-btn" onClick="{{ toggleTheme }}" aria-label="Switch between light and dark" title="Light / dark"><span class="ico ico-theme"></span></button>
+        <button class="icon-btn menu-btn" onClick="{{ toggleMenu }}" aria-label="Menu"><span class="ico i-menu"></span></button>
+      </div>
+    </div>
+  </div>
+  <sc-if value="{{ menuOpen }}" hint-placeholder-val="{{ false }}">
+    <div class="wrap mobile-menu" style="flex-direction:column;padding-bottom:var(--space-4);font-family:var(--font-heading);font-size:22px">
+      <a href="Home.dc.html" style="padding:10px 0;border-top:1px solid var(--color-divider);color:var(--color-text)">Home</a>
+      <a href="projects.dc.html" style="padding:10px 0;border-top:1px solid var(--color-divider);color:var(--color-text)">Work</a>
+      <a href="blog.dc.html" style="padding:10px 0;border-top:1px solid var(--color-divider);color:var(--color-text)">Writing</a>
+      <a href="about.dc.html" style="padding:10px 0;border-top:1px solid var(--color-divider);color:var(--color-text)">About</a>
+      <a href="contact.dc.html" style="padding:10px 0;border-top:1px solid var(--color-divider);color:var(--color-accent-700)">Contact</a>
+    </div>
+  </sc-if>
+</nav>
+
+<main>
+<header class="wrap" style="padding-top:calc(var(--space-8) * 1.5);padding-bottom:var(--space-8)">
+  <div style="font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--color-accent-700)">Contact</div>
+  <h1 style="font-size:clamp(38px,5.6vw,62px);font-weight:400;line-height:1.03;margin:var(--space-3) 0 var(--space-4);max-width:18ch">Tell me about the problem.</h1>
+  <p style="max-width:58ch;font-size:16.5px;line-height:1.6;color:var(--muted);margin:0">One or two lines about what you are trying to do with your data is enough to start. I reply to everything within a couple of days.</p>
+</header>
+
+<div class="wrap stack-sm" style="display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:calc(var(--space-8) * 1.5);padding-bottom:calc(var(--space-8) * 1.5);align-items:start">
+  <div style="border-top:2px solid var(--color-accent);padding-top:var(--space-6)">
+    <sc-if value="{{ showForm }}" hint-placeholder-val="{{ true }}">
+      <form name="contact" method="POST" action="/" data-netlify="true" netlify-honeypot="bot-field" onSubmit="{{ submit }}" style="display:flex;flex-direction:column;gap:var(--space-4)">
+        <input type="hidden" name="form-name" value="contact">
+        <p style="display:none"><label>Leave empty <input name="bot-field"></label></p>
+        <div class="stack-sm" style="display:grid;grid-template-columns:1fr 1fr;gap:var(--space-4)">
+          <div class="field"><label for="name">Name</label><input class="input" id="name" name="name" autocomplete="name" required></div>
+          <div class="field"><label for="email">Email</label><input class="input" id="email" name="email" type="email" autocomplete="email" required></div>
+        </div>
+        <div class="field">
+          <label for="topic">What is this about?</label>
+          <select class="input" id="topic" name="topic">
+            <option>A consulting project</option>
+            <option>A full-time role</option>
+            <option>Something I wrote</option>
+            <option>Something else</option>
+          </select>
+        </div>
+        <div class="field"><label for="message">Message</label><textarea class="input" id="message" name="message" rows="6" required placeholder="A line or two about the problem."></textarea></div>
+        <div style="display:flex;align-items:center;gap:var(--space-4);flex-wrap:wrap">
+          <button class="btn btn-primary" type="submit" disabled="{{ sending }}">{{ sendLabel }}</button>
+          <span style="font-size:13px;color:var(--faint)">or email <a href="{{ mailto }}">{{ profile.email }}</a></span>
+        </div>
+        <sc-if value="{{ error }}" hint-placeholder-val="{{ false }}">
+          <p role="alert" style="margin:0;font-size:13.5px;color:var(--color-accent-700)">That did not send. Please email <a href="{{ mailto }}">{{ profile.email }}</a> directly.</p>
+        </sc-if>
+      </form>
+    </sc-if>
+    <sc-if value="{{ sent }}" hint-placeholder-val="{{ false }}">
+      <div role="status" style="padding:var(--space-6) 0">
+        <h2 style="font-weight:400;font-size:32px;margin:0 0 var(--space-2)">Thank you — it arrived.</h2>
+        <p style="margin:0;color:var(--muted);font-size:15.5px">I will reply within a couple of days. In the meantime, the <a href="projects.dc.html">projects</a> and <a href="blog.dc.html">writing</a> are a good place to look around.</p>
+      </div>
+    </sc-if>
+  </div>
+
+  <aside style="display:flex;flex-direction:column;gap:var(--space-8)">
+    <div>
+      <div style="font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--faint)">Elsewhere</div>
+      <div style="display:flex;flex-direction:column;font-size:15px;line-height:2;margin-top:var(--space-2)">
+        <a href="{{ mailto }}">{{ profile.email }}</a>
+        <a href="{{ profile.github }}">GitHub</a>
+        <a href="{{ profile.linkedin }}">LinkedIn</a>
+      </div>
+    </div>
+    <dl style="margin:0;font-size:13.5px;line-height:1.7;color:var(--faint)">
+      <div style="display:flex;justify-content:space-between;padding:6px 0;border-top:1px solid var(--color-divider)"><dt>Based</dt><dd style="margin:0;color:var(--color-text)">{{ profile.location }} · IST</dd></div>
+      <div style="display:flex;justify-content:space-between;padding:6px 0;border-top:1px solid var(--color-divider)"><dt>Availability</dt><dd style="margin:0;color:var(--color-accent-700)">{{ availability }}</dd></div>
+      <div style="display:flex;justify-content:space-between;padding:6px 0;border-top:1px solid var(--color-divider);border-bottom:1px solid var(--color-divider)"><dt>Response</dt><dd style="margin:0;color:var(--color-text)">About 2 days</dd></div>
+    </dl>
+  </aside>
+</div>
+</main>
+
+<footer style="border-top:1px solid var(--color-divider)">
+  <div class="wrap" style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:var(--space-4);padding-top:var(--space-6);padding-bottom:var(--space-6);font-size:13px;color:var(--faint)">
+    <span>© 2026 Keyur K</span>
+    <span style="display:flex;gap:var(--space-6)"><a href="{{ profile.github }}">GitHub</a><a href="{{ profile.linkedin }}">LinkedIn</a><a href="{{ mailto }}">Email</a></span>
+  </div>
+</footer>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { menuOpen: false, data: null, status: 'idle' };
+  async componentDidMount() {
+    const S = await (window.Site ? Promise.resolve(window.Site) : new Promise(r => { const t = () => window.Site ? r(window.Site) : setTimeout(t, 16); t(); }));
+    this.setState({ data: await S.all() });
+  }
+  submit = async (e) => {
+    e.preventDefault();
+    const form = e.target;
+    this.setState({ status: 'sending' });
+    try {
+      const body = new URLSearchParams(new FormData(form)).toString();
+      const r = await fetch('/', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body });
+      if (!r.ok) throw new Error(r.status);
+      this.setState({ status: 'sent' });
+    } catch (err) {
+      this.setState({ status: 'error' });
+    }
+  };
+  renderVals() {
+    const d = this.state.data;
+    const profile = d ? d.profile : {};
+    const st = this.state.status;
+    return {
+      toggleTheme: () => window.Site && window.Site.toggleTheme(),
+      toggleMenu: () => this.setState(s => ({ menuOpen: !s.menuOpen })),
+      menuOpen: this.state.menuOpen,
+      profile, mailto: 'mailto:' + (profile.email || ''),
+      availability: profile.available === false ? 'Not taking work' : 'Open to work',
+      submit: this.submit,
+      showForm: st !== 'sent', sent: st === 'sent', error: st === 'error',
+      sending: st === 'sending', sendLabel: st === 'sending' ? 'Sending…' : 'Send message'
+    };
+  }
+}
+</script>
+</body>
+</html>

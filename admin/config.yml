@@ -1,0 +1,134 @@
+# Decap CMS — edits the JSON files in /content. Log in at /admin
+# Netlify (recommended): enable Identity + Git Gateway in the Netlify dashboard.
+backend:
+  name: git-gateway
+  branch: main
+
+# GitHub Pages instead? Replace the backend block above with:
+# backend:
+#   name: github
+#   repo: YOUR-USERNAME/YOUR-REPO
+#   branch: main
+#   base_url: https://YOUR-OAUTH-PROXY   # e.g. a free Cloudflare Worker OAuth proxy
+
+media_folder: assets/uploads
+public_folder: assets/uploads
+
+collections:
+  - name: content
+    label: Website
+    editor: { preview: false }
+    files:
+
+      - name: projects
+        label: Projects
+        file: content/projects.json
+        fields:
+          - name: items
+            label: Projects
+            label_singular: project
+            widget: list
+            summary: "{{fields.title}} — {{fields.module}}, {{fields.year}}"
+            fields:
+              - { name: title, label: Title, widget: string }
+              - { name: slug, label: "Web address (lowercase-with-dashes, unique)", widget: string }
+              - { name: module, label: Module, widget: select, options: ["AI", "Deep Learning", "Machine Learning", "Data Analytics", "Data Engineering"] }
+              - { name: level, label: Level, widget: select, options: ["Foundation", "Applied", "Advanced"] }
+              - { name: year, label: Year, widget: string }
+              - { name: featured, label: "Show on home page", widget: boolean, default: false }
+              - { name: summary, label: "One-line summary (lists)", widget: text }
+              - { name: lead, label: "Intro paragraph (project page)", widget: text }
+              - { name: role, label: Role, widget: string, required: false }
+              - { name: duration, label: Duration, widget: string, required: false }
+              - { name: status, label: Status, widget: string, required: false }
+              - { name: stack, label: "Stack (comma separated)", widget: string, required: false }
+              - { name: thumb, label: "Thumbnail (4:3)", widget: image, required: false }
+              - { name: hero, label: "Hero image (wide)", widget: image, required: false }
+              - name: sections
+                label: Sections
+                label_singular: section
+                widget: list
+                summary: "{{fields.heading}}"
+                fields:
+                  - { name: heading, label: Heading, widget: string }
+                  - { name: body, label: "Text (leave a blank line between paragraphs)", widget: text }
+                  - { name: quote, label: "Pull quote", widget: string, required: false }
+                  - { name: figure, label: "Figure image", widget: image, required: false }
+                  - { name: caption, label: "Figure caption", widget: string, required: false }
+                  - name: metrics
+                    label: "Key numbers"
+                    label_singular: number
+                    widget: list
+                    required: false
+                    fields:
+                      - { name: value, label: "Value (e.g. 92%)", widget: string }
+                      - { name: label, label: Label, widget: string }
+
+      - name: posts
+        label: Blog posts
+        file: content/posts.json
+        fields:
+          - name: items
+            label: Posts
+            label_singular: post
+            widget: list
+            summary: "{{fields.title}} — {{fields.date}}"
+            fields:
+              - { name: title, label: Title, widget: string }
+              - { name: slug, label: "Web address (lowercase-with-dashes, unique)", widget: string }
+              - { name: category, label: Module, widget: select, options: ["AI", "Deep Learning", "Machine Learning", "Data Analytics", "Data Engineering"] }
+              - { name: date, label: Date, widget: datetime, format: "YYYY-MM-DD", date_format: "YYYY-MM-DD", time_format: false }
+              - { name: minutes, label: "Reading time (minutes)", widget: string }
+              - { name: excerpt, label: "Excerpt (lists)", widget: text }
+              - { name: standfirst, label: "Standfirst (under the title)", widget: text }
+              - { name: hero, label: "Figure for the blog list", widget: image, required: false }
+              - { name: intro, label: "Opening paragraph (gets the drop cap)", widget: text }
+              - name: sections
+                label: Sections
+                label_singular: section
+                widget: list
+                summary: "{{fields.heading}}"
+                fields:
+                  - { name: heading, label: Heading, widget: string }
+                  - { name: body, label: "Text (leave a blank line between paragraphs)", widget: text }
+                  - { name: quote, label: "Pull quote", widget: string, required: false }
+              - { name: notes, label: "Notes (one per line)", widget: text, required: false }
+
+      - name: profile
+        label: Profile & About
+        file: content/profile.json
+        fields:
+          - { name: name, label: Name, widget: string }
+          - { name: role, label: Role, widget: string }
+          - { name: location, label: Location, widget: string }
+          - { name: years, label: "Experience (e.g. 9 years)", widget: string }
+          - { name: available, label: "Open to work", widget: boolean }
+          - { name: email, label: Email, widget: string }
+          - { name: github, label: "GitHub URL", widget: string }
+          - { name: linkedin, label: "LinkedIn URL", widget: string }
+          - { name: cv, label: "CV (PDF)", widget: file, required: false }
+          - { name: portrait, label: "Portrait (4:5)", widget: image, required: false }
+          - { name: heroTitle, label: "Home headline", widget: text }
+          - { name: heroLead, label: "Home intro", widget: text }
+          - { name: aboutTitle, label: "About headline", widget: string }
+          - { name: about, label: "About text (blank line between paragraphs)", widget: text }
+          - name: modules
+            label: Modules
+            widget: list
+            summary: "{{fields.numeral}} · {{fields.full}}"
+            fields:
+              - { name: numeral, label: Numeral, widget: string }
+              - { name: name, label: "Short name (used to file projects/posts)", widget: string }
+              - { name: full, label: "Full name", widget: string }
+              - { name: desc, label: Description, widget: string }
+          - name: experience
+            label: Experience
+            widget: list
+            summary: "{{fields.years}} — {{fields.role}}"
+            fields:
+              - { name: years, label: Years, widget: string }
+              - { name: role, label: Role, widget: string }
+              - { name: org, label: Organisation, widget: string }
+              - { name: note, label: Note, widget: string }
+          - { name: tools, label: "Tools (comma separated)", widget: text }
+          - { name: principles, label: "Principles (one per line)", widget: text }

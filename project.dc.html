@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<title>Project — Keyur K</title>
+<link rel="stylesheet" href="_ds/classical-9b5d3fbb-4395-43b3-8682-34d1d8fadc0a/styles.css">
+<script src="_ds/classical-9b5d3fbb-4395-43b3-8682-34d1d8fadc0a/_ds_bundle.js"></script>
+<link rel="stylesheet" href="site.css">
+<script src="site.js"></script>
+</helmet>
+
+<nav style="position:sticky;top:0;z-index:30;background:color-mix(in srgb,var(--paper) 90%,transparent);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-bottom:1px solid var(--color-divider)">
+  <div class="wrap" style="display:flex;align-items:center;justify-content:space-between;gap:var(--space-4);height:64px">
+    <a href="Home.dc.html" style="font-family:var(--font-heading);font-size:21px;font-weight:500;color:var(--color-text)">Keyur K</a>
+    <div style="display:flex;align-items:center;gap:var(--space-6)">
+      <div class="navlinks" style="display:flex;align-items:center;gap:var(--space-6);font-size:14px">
+        <a href="projects.dc.html" style="color:var(--color-accent-700);border-bottom:1px solid var(--color-accent)">Work</a>
+        <a href="blog.dc.html" style="color:var(--color-text)">Writing</a>
+        <a href="about.dc.html" style="color:var(--color-text)">About</a>
+        <a href="contact.dc.html" style="color:var(--color-text)">Contact</a>
+      </div>
+      <div style="display:flex;gap:var(--space-2)">
+        <button class="icon-btn" onClick="{{ toggleTheme }}" aria-label="Switch between light and dark" title="Light / dark"><span class="ico ico-theme"></span></button>
+        <button class="icon-btn menu-btn" onClick="{{ toggleMenu }}" aria-label="Menu"><span class="ico i-menu"></span></button>
+      </div>
+    </div>
+  </div>
+  <sc-if value="{{ menuOpen }}" hint-placeholder-val="{{ false }}">
+    <div class="wrap mobile-menu" style="flex-direction:column;padding-bottom:var(--space-4);font-family:var(--font-heading);font-size:22px">
+      <a href="Home.dc.html" style="padding:10px 0;border-top:1px solid var(--color-divider);color:var(--color-text)">Home</a>
+      <a href="projects.dc.html" style="padding:10px 0;border-top:1px solid var(--color-divider);color:var(--color-accent-700)">Work</a>
+      <a href="blog.dc.html" style="padding:10px 0;border-top:1px solid var(--color-divider);color:var(--color-text)">Writing</a>
+      <a href="about.dc.html" style="padding:10px 0;border-top:1px solid var(--color-divider);color:var(--color-text)">About</a>
+      <a href="contact.dc.html" style="padding:10px 0;border-top:1px solid var(--color-divider);color:var(--color-text)">Contact</a>
+    </div>
+  </sc-if>
+</nav>
+
+<main>
+<header class="wrap" style="padding-top:var(--space-8);padding-bottom:var(--space-8);border-bottom:1px solid var(--color-divider)">
+  <div style="font-size:12px;color:var(--faint);margin-bottom:var(--space-6);display:flex;gap:8px;flex-wrap:wrap">
+    <a href="projects.dc.html">Projects</a><span>/</span><a href="projects.dc.html?m={{ p.moduleKey }}">{{ p.moduleFull }}</a><span>/</span><span style="color:var(--color-text)">{{ p.title }}</span>
+  </div>
+  <div class="stack-sm" style="display:grid;grid-template-columns:minmax(0,1fr) 290px;gap:var(--space-8);align-items:end">
+    <div>
+      <h1 style="font-size:clamp(38px,5.6vw,62px);font-weight:400;line-height:1.02;margin:0 0 var(--space-4);max-width:16ch;text-wrap:balance">{{ p.title }}</h1>
+      <p style="max-width:60ch;font-size:17px;line-height:1.6;text-align:justify;hyphens:auto;color:var(--muted);margin:0">{{ p.lead }}</p>
+    </div>
+    <dl style="margin:0;font-size:13px;line-height:1.9;color:var(--faint);border-top:1px solid var(--color-accent);padding-top:var(--space-2)">
+      <sc-for list="{{ spec }}" as="s" hint-placeholder-count="5">
+        <div style="display:flex;justify-content:space-between;gap:var(--space-4);border-bottom:1px solid var(--color-divider);padding:5px 0"><dt>{{ s.k }}</dt><dd style="margin:0;color:var(--color-text);text-align:right">{{ s.v }}</dd></div>
+      </sc-for>
+    </dl>
+  </div>
+  <div class="plate" style="aspect-ratio:24/9;margin-top:var(--space-8);overflow:hidden">
+    <sc-if value="{{ p.hero }}" hint-placeholder-val="{{ false }}"><img src="{{ p.hero }}" alt="{{ p.title }}"></sc-if>
+    <sc-if value="{{ p.noHero }}" hint-placeholder-val="{{ true }}"><div class="ph" style="width:100%;height:100%">Hero image</div></sc-if>
+  </div>
+</header>
+
+<div class="wrap stack-sm" style="display:grid;grid-template-columns:200px minmax(0,1fr);gap:calc(var(--space-8) * 1.5);padding-top:calc(var(--space-8) * 1.5);padding-bottom:calc(var(--space-8) * 1.5)">
+  <aside class="static-sm" style="position:sticky;top:88px;align-self:start">
+    <div style="font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--faint)">Contents</div>
+    <div style="font-size:13.5px;line-height:1.5;margin-top:var(--space-3);border-left:1px solid var(--color-divider);display:flex;flex-direction:column">
+      <sc-for list="{{ toc }}" as="t" hint-placeholder-count="5">
+        <a href="#{{ t.id }}" style="{{ t.style }}"><span style="font-feature-settings:'tnum';opacity:.65;margin-right:8px">{{ t.num }}</span>{{ t.heading }}</a>
+      </sc-for>
+    </div>
+    <div style="font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--faint);margin-top:var(--space-8)">Stack</div>
+    <div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:var(--space-3)">
+      <sc-for list="{{ stack }}" as="s" hint-placeholder-count="4"><span class="tag tag-outline">{{ s }}</span></sc-for>
+    </div>
+    <a class="btn btn-primary btn-block" href="contact.dc.html" style="margin-top:var(--space-8);font-size:13px">Discuss a similar build</a>
+  </aside>
+
+  <article style="max-width:68ch;min-width:0">
+    <sc-for list="{{ sections }}" as="s" hint-placeholder-count="4">
+      <section id="{{ s.id }}" data-sec="{{ s.id }}" style="scroll-margin-top:88px;padding-bottom:var(--space-8);margin-bottom:var(--space-8);border-bottom:1px solid var(--color-divider)">
+        <h2 style="font-weight:400;font-size:30px;margin:0 0 var(--space-4)"><span style="font-feature-settings:'tnum';color:var(--color-accent-700);font-size:18px;margin-right:10px">{{ s.num }}</span>{{ s.heading }}</h2>
+        <sc-for list="{{ s.paras }}" as="para" hint-placeholder-count="1">
+          <p style="text-align:justify;hyphens:auto;font-size:16px;line-height:1.75;margin:0 0 var(--space-4)">{{ para }}</p>
+        </sc-for>
+        <sc-if value="{{ s.quote }}" hint-placeholder-val="{{ false }}">
+          <blockquote style="margin:var(--space-6) 0 0;padding-left:var(--space-6);border-left:2px solid var(--color-accent);font-family:var(--font-heading);font-size:26px;line-height:1.32;color:var(--muted);max-width:40ch">{{ s.quote }}</blockquote>
+        </sc-if>
+        <sc-if value="{{ s.hasFigure }}" hint-placeholder-val="{{ false }}">
+          <figure style="margin:var(--space-6) 0 0">
+            <div class="plate" style="aspect-ratio:16/7;overflow:hidden">
+              <sc-if value="{{ s.figure }}" hint-placeholder-val="{{ false }}"><img src="{{ s.figure }}" alt="{{ s.caption }}" loading="lazy"></sc-if>
+              <sc-if value="{{ s.noFigure }}" hint-placeholder-val="{{ true }}"><div class="ph" style="width:100%;height:100%">Figure</div></sc-if>
+            </div>
+            <figcaption style="font-size:12.5px;color:var(--faint);margin-top:var(--space-2)">{{ s.caption }}</figcaption>
+          </figure>
+        </sc-if>
+        <sc-if value="{{ s.hasMetrics }}" hint-placeholder-val="{{ false }}">
+          <div class="two-sm" style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:var(--space-6);margin-top:var(--space-6)">
+            <sc-for list="{{ s.metrics }}" as="m" hint-placeholder-count="4">
+              <div style="border-top:1px solid var(--color-accent);padding-top:var(--space-2)"><div style="font-family:var(--font-heading);font-size:42px;font-weight:400;font-feature-settings:'tnum';line-height:1">{{ m.value }}</div><div style="font-size:12px;color:var(--faint);margin-top:6px">{{ m.label }}</div></div>
+            </sc-for>
+          </div>
+        </sc-if>
+      </section>
+    </sc-for>
+    <div style="display:flex;justify-content:space-between;gap:var(--space-4);flex-wrap:wrap;font-size:14px">
+      <a href="projects.dc.html">← All projects</a>
+      <a href="project.dc.html?p={{ next.slug }}">Next · {{ next.title }} →</a>
+    </div>
+  </article>
+</div>
+</main>
+
+<footer style="border-top:1px solid var(--color-divider)">
+  <div class="wrap" style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:var(--space-4);padding-top:var(--space-6);padding-bottom:var(--space-6);font-size:13px;color:var(--faint)">
+    <span>© 2026 Keyur K</span>
+    <span style="display:flex;gap:var(--space-6)"><a href="{{ profile.github }}">GitHub</a><a href="{{ profile.linkedin }}">LinkedIn</a><a href="{{ mailto }}">Email</a></span>
+  </div>
+</footer>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { menuOpen: false, data: null, active: null };
+  async componentDidMount() {
+    const S = await (window.Site ? Promise.resolve(window.Site) : new Promise(r => { const t = () => window.Site ? r(window.Site) : setTimeout(t, 16); t(); }));
+    this.S = S;
+    this.setState({ data: await S.all() }, () => setTimeout(() => this.spy(), 60));
+  }
+  componentWillUnmount() { this.io && this.io.disconnect(); }
+  spy() {
+    this.io && this.io.disconnect();
+    const els = document.querySelectorAll('[data-sec]');
+    if (!els.length || !window.IntersectionObserver) return;
+    this.io = new IntersectionObserver(es => {
+      const vis = es.filter(e => e.isIntersecting).sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
+      if (vis[0]) this.setState({ active: vis[0].target.id });
+    }, { rootMargin: '-90px 0px -60% 0px' });
+    els.forEach(el => this.io.observe(el));
+  }
+  renderVals() {
+    const d = this.state.data, S = this.S;
+    const profile = d ? d.profile : {};
+    const projects = d ? d.projects : [];
+    const slug = S ? S.param('p') : null;
+    const idx = Math.max(0, projects.findIndex(x => x.slug === slug));
+    const raw = projects[idx] || {};
+    const mod = (profile.modules || []).find(m => m.name === raw.module) || {};
+    if (raw.title && document.title !== raw.title + ' — Keyur K') document.title = raw.title + ' — Keyur K';
+    const sections = (raw.sections || []).map((s, i) => ({
+      ...s, id: 's' + (i + 1), num: String(i + 1).padStart(2, '0'),
+      paras: S ? S.paras(s.body) : [],
+      hasFigure: !!(s.figure || s.caption), noFigure: !s.figure,
+      hasMetrics: !!(s.metrics && s.metrics.length), metrics: s.metrics || []
+    }));
+    const active = this.state.active || (sections[0] && sections[0].id);
+    const next = projects.length > 1 ? projects[(idx + 1) % projects.length] : {};
+    return {
+      toggleTheme: () => window.Site && window.Site.toggleTheme(),
+      toggleMenu: () => this.setState(s => ({ menuOpen: !s.menuOpen })),
+      menuOpen: this.state.menuOpen,
+      profile, mailto: 'mailto:' + (profile.email || ''),
+      p: { ...raw, moduleFull: mod.full || raw.module, moduleKey: encodeURIComponent(raw.module || ''), noHero: !raw.hero },
+      spec: [
+        { k: 'Module', v: (raw.module || '') + (raw.level ? ' · ' + raw.level : '') },
+        { k: 'Year', v: raw.year }, { k: 'Role', v: raw.role }, { k: 'Duration', v: raw.duration }, { k: 'Status', v: raw.status }
+      ].filter(s => s.v),
+      stack: S ? S.list(raw.stack) : [],
+      sections,
+      toc: sections.map(s => ({ id: s.id, num: s.num, heading: s.heading, style: {
+        padding: '6px 0 6px 14px', marginLeft: '-1px',
+        borderLeft: '1px solid ' + (s.id === active ? 'var(--color-accent)' : 'transparent'),
+        color: s.id === active ? 'var(--color-accent-700)' : 'var(--muted)'
+      } })),
+      next
+    };
+  }
+}
+</script>
+</body>
+</html>

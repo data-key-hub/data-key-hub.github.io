@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<title>Keyur K — Data Analytics Engineer</title>
+<meta name="description" content="Keyur K, Data Analytics Engineer. Projects and writing across AI, deep learning, machine learning, data analytics and data engineering.">
+<link rel="stylesheet" href="_ds/classical-9b5d3fbb-4395-43b3-8682-34d1d8fadc0a/styles.css">
+<script src="_ds/classical-9b5d3fbb-4395-43b3-8682-34d1d8fadc0a/_ds_bundle.js"></script>
+<link rel="stylesheet" href="site.css">
+<script src="site.js"></script>
+</helmet>
+
+<nav style="position:sticky;top:0;z-index:30;background:color-mix(in srgb,var(--paper) 90%,transparent);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-bottom:1px solid var(--color-divider)">
+  <div class="wrap" style="display:flex;align-items:center;justify-content:space-between;gap:var(--space-4);height:64px">
+    <a href="Home.dc.html" aria-current="page" style="font-family:var(--font-heading);font-size:21px;font-weight:500;color:var(--color-text)">Keyur K</a>
+    <div style="display:flex;align-items:center;gap:var(--space-6)">
+      <div class="navlinks" style="display:flex;align-items:center;gap:var(--space-6);font-size:14px">
+        <a href="projects.dc.html" style="color:var(--color-text)">Work</a>
+        <a href="blog.dc.html" style="color:var(--color-text)">Writing</a>
+        <a href="about.dc.html" style="color:var(--color-text)">About</a>
+        <a href="contact.dc.html" style="color:var(--color-text)">Contact</a>
+      </div>
+      <div style="display:flex;gap:var(--space-2)">
+        <button class="icon-btn" onClick="{{ toggleTheme }}" aria-label="Switch between light and dark" title="Light / dark"><span class="ico ico-theme"></span></button>
+        <button class="icon-btn menu-btn" onClick="{{ toggleMenu }}" aria-label="Menu"><span class="ico i-menu"></span></button>
+      </div>
+    </div>
+  </div>
+  <sc-if value="{{ menuOpen }}" hint-placeholder-val="{{ false }}">
+    <div class="wrap mobile-menu" style="flex-direction:column;padding-bottom:var(--space-4);font-family:var(--font-heading);font-size:22px">
+      <a href="projects.dc.html" style="padding:10px 0;border-top:1px solid var(--color-divider);color:var(--color-text)">Work</a>
+      <a href="blog.dc.html" style="padding:10px 0;border-top:1px solid var(--color-divider);color:var(--color-text)">Writing</a>
+      <a href="about.dc.html" style="padding:10px 0;border-top:1px solid var(--color-divider);color:var(--color-text)">About</a>
+      <a href="contact.dc.html" style="padding:10px 0;border-top:1px solid var(--color-divider);color:var(--color-text)">Contact</a>
+    </div>
+  </sc-if>
+</nav>
+
+<main>
+<header class="wrap" style="padding-top:calc(var(--space-8) * 2);padding-bottom:calc(var(--space-8) * 1.5)">
+  <div style="font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--color-accent-700);display:flex;align-items:center;gap:var(--space-3);flex-wrap:wrap">
+    <span>{{ profile.role }} · {{ profile.location }}</span>
+    <sc-if value="{{ profile.available }}" hint-placeholder-val="{{ true }}">
+      <span style="display:inline-flex;align-items:center;gap:6px;letter-spacing:.08em;text-transform:none;font-size:12px;color:var(--muted)"><span style="width:7px;height:7px;border-radius:50%;background:var(--color-accent)"></span>Open to work</span>
+    </sc-if>
+  </div>
+  <h1 style="font-size:clamp(40px,6.4vw,74px);font-weight:400;line-height:1.02;margin:var(--space-4) 0;max-width:17ch;text-wrap:balance">{{ profile.heroTitle }}</h1>
+  <p style="max-width:60ch;font-size:17px;line-height:1.62;text-align:justify;hyphens:auto;color:var(--muted);margin:0">{{ profile.heroLead }}</p>
+  <div style="display:flex;gap:var(--space-3);margin-top:var(--space-8);flex-wrap:wrap">
+    <a class="btn btn-primary" href="projects.dc.html">See the work</a>
+    <a class="btn btn-secondary" href="contact.dc.html">Hire me</a>
+  </div>
+</header>
+
+<section class="wrap" style="padding-top:var(--space-8);padding-bottom:var(--space-8);border-top:1px solid var(--color-divider)">
+  <div style="display:flex;align-items:baseline;justify-content:space-between;gap:var(--space-4);margin-bottom:var(--space-6)">
+    <h2 style="margin:0;font-weight:400;font-size:30px">Five modules</h2>
+    <a href="projects.dc.html" style="font-size:13px">Browse all projects →</a>
+  </div>
+  <div class="stack-sm" style="display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:var(--space-6)">
+    <sc-for list="{{ modules }}" as="m" hint-placeholder-count="5">
+      <a class="lift" href="projects.dc.html?m={{ m.key }}" style="display:block;padding:var(--space-4) var(--space-3);border-top:2px solid var(--color-accent);color:inherit">
+        <div style="font-feature-settings:'tnum';font-size:12px;color:var(--color-accent-700);letter-spacing:.08em">{{ m.numeral }}</div>
+        <div style="font-family:var(--font-heading);font-size:21px;line-height:1.1;margin:8px 0 6px">{{ m.full }}</div>
+        <p style="font-size:12.5px;line-height:1.5;color:var(--muted);margin:0">{{ m.desc }}</p>
+        <div style="font-feature-settings:'tnum';font-size:11.5px;color:var(--faint);margin-top:10px">{{ m.countLabel }}</div>
+      </a>
+    </sc-for>
+  </div>
+</section>
+
+<section class="wrap" style="padding-top:var(--space-8);padding-bottom:var(--space-8);border-top:1px solid var(--color-divider)">
+  <div style="display:flex;align-items:baseline;justify-content:space-between;gap:var(--space-4);margin-bottom:var(--space-4)">
+    <h2 style="margin:0;font-weight:400;font-size:30px">Selected work</h2>
+    <a href="projects.dc.html" style="font-size:13px">All projects →</a>
+  </div>
+  <div style="display:flex;flex-direction:column;border-bottom:1px solid var(--color-divider)">
+    <sc-for list="{{ work }}" as="p" hint-placeholder-count="4">
+      <a class="lift row-sm" href="project.dc.html?p={{ p.slug }}" style="display:grid;grid-template-columns:52px minmax(0,1fr) 170px 60px;gap:var(--space-4);align-items:baseline;padding:var(--space-4) var(--space-2);border-top:1px solid var(--color-divider);color:inherit">
+        <span class="hide-sm" style="font-feature-settings:'tnum';font-size:12px;color:var(--color-accent-700)">{{ p.no }}</span>
+        <span>
+          <span style="font-family:var(--font-heading);font-size:24px;line-height:1.15">{{ p.title }}</span>
+          <span style="display:block;font-size:13.5px;line-height:1.55;color:var(--muted);margin-top:4px">{{ p.summary }}</span>
+        </span>
+        <span class="hide-sm" style="font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--faint)">{{ p.module }}</span>
+        <span style="font-size:12px;font-feature-settings:'tnum';text-align:right;color:var(--faint)">{{ p.year }}</span>
+      </a>
+    </sc-for>
+  </div>
+</section>
+
+<section class="wrap" style="padding-top:var(--space-8);padding-bottom:calc(var(--space-8) * 1.5);border-top:1px solid var(--color-divider)">
+  <div style="display:flex;align-items:baseline;justify-content:space-between;gap:var(--space-4);margin-bottom:var(--space-6)">
+    <h2 style="margin:0;font-weight:400;font-size:30px">From the blog</h2>
+    <a href="blog.dc.html" style="font-size:13px">All writing →</a>
+  </div>
+  <div class="stack-sm" style="display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:var(--space-8);align-items:start">
+    <article style="border-top:2px solid var(--color-accent);padding-top:var(--space-4)">
+      <div style="display:flex;gap:var(--space-2);align-items:baseline;flex-wrap:wrap"><span class="tag tag-outline">{{ lead.category }}</span><span style="font-size:12px;font-feature-settings:'tnum';color:var(--faint)">{{ lead.dateLabel }} · {{ lead.minutes }} min</span></div>
+      <h3 style="font-weight:400;font-size:30px;margin:var(--space-3) 0 var(--space-2);line-height:1.1"><a href="post.dc.html?p={{ lead.slug }}" style="color:inherit">{{ lead.title }}</a></h3>
+      <p style="font-size:15px;line-height:1.62;text-align:justify;hyphens:auto;color:var(--muted);margin:0">{{ lead.excerpt }}</p>
+      <a class="btn btn-ghost" href="post.dc.html?p={{ lead.slug }}" style="padding-left:0;margin-top:var(--space-2)">Read →</a>
+    </article>
+    <div style="display:flex;flex-direction:column;border-bottom:1px solid var(--color-divider)">
+      <sc-for list="{{ morePosts }}" as="q" hint-placeholder-count="3">
+        <a class="lift" href="post.dc.html?p={{ q.slug }}" style="display:block;border-top:1px solid var(--color-divider);padding:var(--space-3) var(--space-2);color:inherit">
+          <span style="display:flex;gap:var(--space-2);align-items:baseline"><span class="tag tag-neutral">{{ q.category }}</span><span style="font-size:11.5px;font-feature-settings:'tnum';color:var(--faint)">{{ q.dateLabel }}</span></span>
+          <span style="display:block;font-family:var(--font-heading);font-size:20px;line-height:1.2;margin-top:6px">{{ q.title }}</span>
+        </a>
+      </sc-for>
+    </div>
+  </div>
+</section>
+
+<section style="background:var(--band-bg);color:rgba(233,229,221,.82)">
+  <div class="wrap stack-sm" style="padding-top:calc(var(--space-8) * 1.5);padding-bottom:calc(var(--space-8) * 1.5);display:grid;grid-template-columns:minmax(0,1fr) auto;gap:var(--space-6);align-items:center">
+    <div>
+      <h2 style="font-weight:400;color:#f3f0ea;margin:0 0 8px;font-size:34px">Have a data problem worth solving?</h2>
+      <p style="margin:0;font-size:15px;max-width:52ch">Currently taking on consulting work in AI, analytics engineering and warehouse builds. One line about the problem is enough to start.</p>
+    </div>
+    <a class="btn" href="contact.dc.html" style="color:#e9c98f;border-color:#b68235">Start a conversation</a>
+  </div>
+</section>
+</main>
+
+<footer style="border-top:1px solid var(--color-divider)">
+  <div class="wrap" style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:var(--space-4);padding-top:var(--space-6);padding-bottom:var(--space-6);font-size:13px;color:var(--faint)">
+    <span>© 2026 Keyur K</span>
+    <span style="display:flex;gap:var(--space-6)"><a href="{{ profile.github }}">GitHub</a><a href="{{ profile.linkedin }}">LinkedIn</a><a href="{{ mailto }}">Email</a></span>
+  </div>
+</footer>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { menuOpen: false, data: null };
+  async componentDidMount() {
+    const S = await (window.Site ? Promise.resolve(window.Site) : new Promise(r => { const t = () => window.Site ? r(window.Site) : setTimeout(t, 16); t(); }));
+    this.S = S;
+    this.setState({ data: await S.all() });
+  }
+  renderVals() {
+    const d = this.state.data, S = this.S;
+    const profile = d ? d.profile : {};
+    const projects = d ? d.projects : [], posts = d ? d.posts : [];
+    const fmt = p => ({ ...p, dateLabel: S ? S.date(p.date) : p.date });
+    const featured = projects.filter(p => p.featured);
+    return {
+      toggleTheme: () => window.Site && window.Site.toggleTheme(),
+      toggleMenu: () => this.setState(s => ({ menuOpen: !s.menuOpen })),
+      menuOpen: this.state.menuOpen,
+      profile,
+      mailto: 'mailto:' + (profile.email || ''),
+      modules: (profile.modules || []).map(m => {
+        const n = projects.filter(p => p.module === m.name).length;
+        return { ...m, key: encodeURIComponent(m.name), countLabel: n + (n === 1 ? ' project' : ' projects') };
+      }),
+      work: (featured.length ? featured : projects).slice(0, 4).map((p, i) => ({ ...p, no: String(i + 1).padStart(2, '0') })),
+      lead: posts[0] ? fmt(posts[0]) : {},
+      morePosts: posts.slice(1, 4).map(fmt)
+    };
+  }
+}
+</script>
+</body>
+</html>
