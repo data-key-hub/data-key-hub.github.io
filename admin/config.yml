@@ -1,15 +1,8 @@
-# Decap CMS — edits the JSON files in /content. Log in at /admin
-# Netlify (recommended): enable Identity + Git Gateway in the Netlify dashboard.
 backend:
-  name: git-gateway
+  name: github
+  repo: data-key-hub/data-key-hub.github.io
   branch: main
-
-# GitHub Pages instead? Replace the backend block above with:
-# backend:
-#   name: github
-#   repo: YOUR-USERNAME/YOUR-REPO
-#   branch: main
-#   base_url: https://YOUR-OAUTH-PROXY   # e.g. a free Cloudflare Worker OAuth proxy
+  base_url: https://keyur-cms-auth.keyur14112000.workers.dev
 
 media_folder: assets/uploads
 public_folder: assets/uploads

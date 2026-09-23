@@ -53,9 +53,9 @@
 <div class="wrap stack-sm" style="display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:calc(var(--space-8) * 1.5);padding-bottom:calc(var(--space-8) * 1.5);align-items:start">
   <div style="border-top:2px solid var(--color-accent);padding-top:var(--space-6)">
     <sc-if value="{{ showForm }}" hint-placeholder-val="{{ true }}">
-      <form name="contact" method="POST" action="/" data-netlify="true" netlify-honeypot="bot-field" onSubmit="{{ submit }}" style="display:flex;flex-direction:column;gap:var(--space-4)">
-        <input type="hidden" name="form-name" value="contact">
-        <p style="display:none"><label>Leave empty <input name="bot-field"></label></p>
+      <form name="contact" method="POST" action="https://formspree.io/f/xcontact" onSubmit="{{ submit }}" style="display:flex;flex-direction:column;gap:var(--space-4)">
+        <input type="hidden" name="_subject" value="New message from your website">
+        <p style="display:none"><label>Leave empty <input name="_gotcha"></label></p>
         <div class="stack-sm" style="display:grid;grid-template-columns:1fr 1fr;gap:var(--space-4)">
           <div class="field"><label for="name">Name</label><input class="input" id="name" name="name" autocomplete="name" required></div>
           <div class="field"><label for="email">Email</label><input class="input" id="email" name="email" type="email" autocomplete="email" required></div>
@@ -125,8 +125,7 @@ class Component extends DCLogic {
     const form = e.target;
     this.setState({ status: 'sending' });
     try {
-      const body = new URLSearchParams(new FormData(form)).toString();
-      const r = await fetch('/', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body });
+      const r = await fetch(form.action, { method: 'POST', headers: { 'Accept': 'application/json' }, body: new FormData(form) });
       if (!r.ok) throw new Error(r.status);
       this.setState({ status: 'sent' });
     } catch (err) {
